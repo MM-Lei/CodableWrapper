@@ -1,13 +1,13 @@
 import Foundation
 
 struct ASTError: CustomStringConvertible, Error {
-    let text: String
+    let message: String
 
-    init(_ text: String) {
-        self.text = text
+    init(_ message: String) {
+        self.message = message
     }
 
     var description: String {
-        text
+        "AST parsing error: \(message)"
     }
 }

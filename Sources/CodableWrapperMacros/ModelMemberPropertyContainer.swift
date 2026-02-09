@@ -214,7 +214,7 @@ private extension ModelMemberPropertyContainer {
                     return nil
                 }
                 guard let type = variable.inferType else {
-                    throw ASTError("please declare property type: \(name)")
+                    throw ASTError("Property '\(name)' must declare an explicit type.")
                 }
 
                 // CodingKeyIgnored

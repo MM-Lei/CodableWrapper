@@ -12,7 +12,7 @@ public struct Codable: ExtensionMacro, MemberMacro {
         } else if let declaration = declaration.as(ClassDeclSyntax.self) {
             inheritedTypes = declaration.inheritanceClause?.inheritedTypes
         } else {
-            throw ASTError("use @Codable in `struct` or `class`")
+            throw ASTError("@Codable can only be applied to struct or class declarations.")
         }
         if let inheritedTypes = inheritedTypes,
            inheritedTypes.contains(where: { inherited in inherited.type.trimmedDescription == "Codable" }) {
@@ -29,6 +29,7 @@ public struct Codable: ExtensionMacro, MemberMacro {
 
     public static func expansion(of node: SwiftSyntax.AttributeSyntax,
                                  providingMembersOf declaration: some SwiftSyntax.DeclGroupSyntax,
+                                 conformingTo _: [SwiftSyntax.TypeSyntax],
                                  in context: some SwiftSyntaxMacros.MacroExpansionContext) throws -> [SwiftSyntax.DeclSyntax] {
         // TODO: diagnostic do not implement `init(from:)` or `encode(to:))`
 

@@ -4,10 +4,11 @@ import SwiftSyntaxMacros
 public struct CodableSubclass: MemberMacro {
     public static func expansion(of node: SwiftSyntax.AttributeSyntax,
                                  providingMembersOf declaration: some SwiftSyntax.DeclGroupSyntax,
+                                 conformingTo _: [SwiftSyntax.TypeSyntax],
                                  in context: some SwiftSyntaxMacros.MacroExpansionContext) throws -> [SwiftSyntax.DeclSyntax]
     {
         guard declaration.is(ClassDeclSyntax.self) else {
-            throw ASTError("not a `subclass`")
+            throw ASTError("@CodableSubclass can only be applied to class declarations.")
         }
 
         let propertyContainer = try ModelMemberPropertyContainer(decl: declaration, context: context)
